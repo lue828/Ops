@@ -9,7 +9,7 @@ import paramiko
 host='192.168.122.10'
 user='lue'
 pwd='123456'
-cmd='sudo ifconfig;df -h'
+cmd='pwd;df -h'
          
 if __name__=='__main__':    
     paramiko.util.log_to_file('paramiko.log')    
