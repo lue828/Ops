@@ -13,7 +13,7 @@ class Login:
   #email 51cto登录用户名或邮箱
   #passwd 51cto登录密码
 
-  _login_data = { 'email':'liulu828','passwd':'1iu1u3724' }
+  _login_data = { 'email':'******','passwd':'******' }
 
   _headers = [
               ('host','home.51cto.com'),\
