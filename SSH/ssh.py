@@ -10,7 +10,7 @@ import paramiko
 host='172.16.27.6'
 user='madhouse'
 pwd='madhouse'
-cmd='pwd;df -h'
+cmd='''sudo ifconfig br0 | grep "inet addr" | awk -F ":" '{print $2}' | awk '{print $1}';sudo df -h'''
          
 if __name__=='__main__':    
     paramiko.util.log_to_file('paramiko.log')    
@@ -24,6 +24,6 @@ if __name__=='__main__':
 #    s.connect('192.168.1.2', username = 'vinod', pkey = sshkey)
     s.connect(host,username=user, password=pwd)    
     stdin,stdout,stderr=s.exec_command(cmd)    
-    print stdout.readline()
-    print stderr.readline()
+    print stdout.read()
+    print stderr.read()
     s.close()
