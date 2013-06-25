@@ -6,9 +6,10 @@
 import os
 import paramiko
 
-host='192.168.122.10'
-user='lue'
-pwd='123456'
+#host='192.168.122.10'
+host='172.16.27.6'
+user='madhouse'
+pwd='madhouse'
 cmd='pwd;df -h'
          
 if __name__=='__main__':    
@@ -23,5 +24,6 @@ if __name__=='__main__':
 #    s.connect('192.168.1.2', username = 'vinod', pkey = sshkey)
     s.connect(host,username=user, password=pwd)    
     stdin,stdout,stderr=s.exec_command(cmd)    
-    print stdout.read()    
+    print stdout.readline()
+    print stderr.readline()
     s.close()
