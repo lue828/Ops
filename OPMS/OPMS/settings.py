@@ -14,9 +14,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
 #db for home
-#        'NAME': 'C:\\Users\\administrator\\git\\Ops\\OPMS\\database\\sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'C:\\Users\\administrator\\git\\Ops\\OPMS\\database\\sqlite.db',                      # Or path to database file if using sqlite3.
 #db for office
-        'NAME': 'C:\\Users\\Madhouse\\git\\Ops\\OPMS\\database\\sqlite.db',                      # Or path to database file if using sqlite3.
+#        'NAME': 'C:\\Users\\Madhouse\\git\\Ops\\OPMS\\database\\sqlite.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -76,6 +76,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(__file__), 'static').replace('\\','/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -131,6 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'admin',
     'books',
+    'bootstrapform',
 )
 
 # A sample logging configuration. The only tangible logging
