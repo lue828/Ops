@@ -2,13 +2,6 @@
 {% block content %}
 {% for book in books %}
 <h2>{{ book.title }}</h2>
-
-{% if authors %}
-    <ul>
-    {% for author in authors %}
-        <li>{{ author.last_name }}</li>
-    {% endfor %}
-    </ul>
 <p>{{ book.publication_date }}</p>
 {% endfor %}
 {% endblock %}

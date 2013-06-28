@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from books.models import Book
+from books.models import Book, Author, Publisher
 
 def search(request):
     errors = []
@@ -15,6 +15,7 @@ def search(request):
     return render_to_response('search_form.html', {'errors': errors})
 
 def archive(request):
-    books = Book.objects.all().order_by("-publication_date")
-    authors = Book.authors()
-    return render_to_response('archive.html', {'books': books, 'authors': authors})
+    books = Book.objects.all().order_by('-publication_date')
+#    authors_list = books.authors.all()
+#    return render_to_response('archive.html', {'books': books, 'authors_list': authors_list})
+    return render_to_response('archive.html', {'books': books})
