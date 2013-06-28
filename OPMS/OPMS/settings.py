@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'admin',
     'books',
-    'bootstrapform',
+    'bootstrap_toolkit',
 )
 
 # A sample logging configuration. The only tangible logging
