@@ -16,6 +16,6 @@ def search(request):
 
 def archive(request):
     books = Book.objects.all().order_by('-publication_date')
-#    authors_list = books.authors.all()
-#    return render_to_response('archive.html', {'books': books, 'authors_list': authors_list})
+#    alist = books.authors.all()
+#    return render_to_response('archive.html', {'books': books, 'alist': alist})
     return render_to_response('archive.html', {'books': books})
