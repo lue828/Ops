@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('books.views',
     url(r'^search/$', 'search'),
+    url(r'^book/$', 'archive')
 )
 
 urlpatterns += patterns('contact.views',
