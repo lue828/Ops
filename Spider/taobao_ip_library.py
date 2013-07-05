@@ -10,14 +10,14 @@ import re
 try:
     scrpit, _addr =  sys.argv
 except ValueError:
-    print "...\n......\n\nû�л�ȡ��IP��ַ  �˳�����!!!\n........Done!"
+    print "...\n......\n\n没有获取到IP地址 退出程序!!!\n........Done!"
     sys.exit()
 
 def net_addr():
     try:
         return socket.getaddrinfo(_addr, None)
     except Exception:
-        print '��Ǹ���������񲻿��á�'
+        print '抱歉！ 网络或服务不可用。'
         sys.exit()
 
 if re.search(r'^([1-2][0-5]?[0-4]?)', _addr):
@@ -26,7 +26,7 @@ else:
     if re.search(r'(\w+\.)?(\w+|\d+)\.(\D){2,3}', _addr):
         net_addr()
     else:
-        print '�����ȡʧ�ܡ�'
+        print '域名获取失败。'
         sys.exit()
 
 def vul_info(vule):
@@ -49,4 +49,4 @@ if __name__ == '__main__':
         else:
             print St_dic(content)["data"]
     else:
-        print "��Ǹ�����񲻿���.",resp["status"]
+        print "抱歉！ 服务不可用。",resp["status"]
