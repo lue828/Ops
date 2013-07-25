@@ -4,6 +4,7 @@ import re
 import time
 import MySQLdb
 
+dt = time.strftime("%Y-%m-%d", time.localtime(time.time()))
 f = open('SmartMAD2_error_130724.log')
 
 for line in f:
@@ -64,12 +65,12 @@ for line in f:
         ua = a.split('&')[0].split('ua=')[1]
 
 
-dt = time.strftime("%Y-%m-%d", time.localtime(time.time()))
+    #Insert into database. 
+    conn = MySQLdb.connect(host='172.16.27.6', user='ops', passwd='madhouse', db='madhouse', charset='utf8')
+    cur = conn.cursor()
+    cur.execute("insert into deallog_deallog(dt, pe, mod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua) value(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (dt, pe, mod, os, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
+    conn.commit()
+    cur.close()
+    conn.close()
 
-#Insert into database. 
-conn = MySQLdb.connect(host='172.16.27.6', user='ops', passwd='madhouse', db='madhouse', charset='utf8')
-cur = conn.cursor()
-cur.execute("insert into deallog_deallog(dt, pe, mod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua) value(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (dt, pe, mod, os, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
-conn.commit()
-cur.close()
-conn.close()
+f.close()
