@@ -35,7 +35,7 @@ for line in f:
     for ro in rrom:
         rom = ro.split('&')[0].split('rom=')[1]
         
-    rjb = re.compile(r'jb=.*')[0].findall(line)
+    rjb = re.compile(r'jb=.*').findall(line)
     for j in rjb:
         jb = j.split('&')[0].split('jb=')[1]
    
@@ -69,7 +69,7 @@ dt = time.strftime("%Y-%m-%d", time.localtime(time.time()))
 #Insert into database. 
 conn = MySQLdb.connect(host='172.16.27.6', user='ops', passwd='madhouse', db='madhouse', charset='utf8')
 cur = conn.cursor()
-cur.execute("insert into deallog_deallog(pe, ua, pv) value(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (dt, pe, mod, os, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
+cur.execute("insert into deallog_deallog(dt, pe, mod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua) value(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (dt, pe, mod, os, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
 conn.commit()
 cur.close()
 conn.close()
