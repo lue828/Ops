@@ -19,9 +19,25 @@ $	%24
 ]	%5d
 ^	%5e
 _	%5f
+:	%3a
 ;	%3b	
 <	%3c	
 =	%3d
 >	%3e	
 ?	%3f	
 @	%40
+linefeed	%0a    \n
+c return	%0d    \r
+
+
+
+line.replace('%20',' ').replace('%21','!').replace('%22','"').replace('%23','#').replace('%24','$').replace('%25','%').replace('%26','&').replace('%27','\'').replace('%28','(').replace('%29',')').replace('%2A','*').replace('%2B','+').replace('%2C',',').replace('%2D','-').replace('%2E','.').replace('%2F','/').replace('%5B','[').replace('%5C','\\').replace('%5D',']').replace('%5E','^').replace('%5F','_').replace('%3A',':').replace('%3B',';').replace('%3C','<').replace('%3D','=').replace('%3E','>').replace('%3F','?').replace('%40','@').replace('%0D','\\r').replace('%0A','\\n')
+
+
+如果是输出给浏览器，就用<br/>
+如果是输出到自己的文件里，就用"\n"，windows下是"\r\n"
+
+所以这里:
+replace('%0D','\\r').replace('%0A','\\n')
+改为：
+replace('%0D%0A','<br/>')
