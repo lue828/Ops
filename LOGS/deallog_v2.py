@@ -152,5 +152,6 @@ def deallog():
 
         #Insert into database. 
         mysqlconn(dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua)
+    f.close()
         
 deallog()
