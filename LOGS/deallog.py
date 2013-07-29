@@ -9,6 +9,8 @@ dt = time.strftime("%Y-%m-%d", time.localtime(time.time()))
 f = open('SmartMAD2_error_130724.log')
 
 for line in f:
+    line = l.replace('%20',' ').replace('%21','!').replace('%22','"').replace('%23','#').replace('%24','$').replace('%25','%').replace('%26','&').replace('%27','\'').replace('%28','(').replace('%29',')').replace('%2A','*').replace('%2B','+').replace('%2C',',').replace('%2D','-').replace('%2E','.').replace('%2F','/').replace('%5B','[').replace('%5C','\\').replace('%5D',']').replace('%5E','^').replace('%5F','_').replace('%3A',':').replace('%3B',';').replace('%3C','<').replace('%3D','=').replace('%3E','>').replace('%3F','?').replace('%40','@').replace('%0D%0A','<br/>').replace('%0D','<br/>').replace('%0A','<br/>')
+    
     rpe= re.compile(r'pe=.*').findall(line)
     if rpe:
         for e in rpe:
