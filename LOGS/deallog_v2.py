@@ -31,10 +31,18 @@ def mysqlconn(dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, u
     dbuser = 'ops'
     dbpass = 'madhouse'
     dbname = 'madhouse'
+    sql_report = "insert into deallog_report(`dt`, `pe`, `dmod`, `dos`, `osv`, `cpu`, `ram`, `rom`, `jb`, `de`, `apn`, `av`, `mem`, `pv`, `ua`) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    sql_deallog = "insert into deallog_deallog(`dt`, `pe`, `dmod`, `dos`, `osv`, `cpu`, `ram`, `rom`, `jb`, `de`, `apn`, `av`, `mem`, `pv`, `ua`) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     conn = MySQLdb.connect(host=dbhost, user=dbuser, passwd=dbpass, db=dbname, charset='utf8')
     cur = conn.cursor()
-    sql = "insert into deallog_deallog(`dt`, `pe`, `dmod`, `dos`, `osv`, `cpu`, `ram`, `rom`, `jb`, `de`, `apn`, `av`, `mem`, `pv`, `ua`) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    cur.execute(sql, (dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
+    cur.execute("select pe from deallog_deallog where pe=%s", pe)
+    res = cur.fetchall()
+    if len(res) == 0:
+        cur.execute(sql_report, (dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
+    else:
+        pass
+
+    cur.execute(sql_deallog, (dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
     conn.commit()
     cur.close()
     conn.close()
