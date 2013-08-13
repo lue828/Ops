@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
+#author: lue
+#time: 2013-08-13
 
-import re, os, sys
+import re
+import os
+import sys
 import MySQLdb
 import datetime
 from ftplib import FTP
 
-#Yesterday's date.
+"""Yesterday's date."""
 now_time = datetime.datetime.now()
 yes_time = now_time + datetime.timedelta(days=-1)
 #dt = yes_time.strftime("%g%m%d")
@@ -14,7 +18,8 @@ yes_time = now_time + datetime.timedelta(days=-1)
 
 #filename = 'SmartMAD2_error_%s.log' %dt
 
-def ftpdown():  
+def ftpdown():
+    """Download log file from ftp server."""
     ftphost = '172.16.30.217'  
     ftpuser = 'smlog'  
     ftppass = 'smlog'  
@@ -39,12 +44,13 @@ def mysqlconn(dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, u
 
     conn = MySQLdb.connect(host=dbhost, user=dbuser, passwd=dbpass, db=dbname, charset='utf8')
     cur = conn.cursor()
-    #cur.execute("select pe from deallog_deallog where pe=%s", pe)
-    #res = cur.fetchall()
-    #if len(res) == 0:
-    #    cur.execute(sql_report, (dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
-    #else:
-    #    pass
+
+#    cur.execute("select pe from deallog_deallog where pe=%s", pe)
+#    res = cur.fetchall()
+#    if len(res) == 0:
+#        cur.execute(sql_report, (dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua))
+#    else:
+#        pass
 
     cur.execute("select pe from deallog_deallog where pe=%s", pe)
     res = cur.fetchall()
@@ -58,6 +64,7 @@ def mysqlconn(dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, u
     conn.close()
 
 def logformat(log):
+    """Decode urlcode and Replace models"""
     d = {
         '%20':' ',
         '%21':'!',
@@ -107,7 +114,7 @@ def logformat(log):
 
 
 def deallog():
-#    ftpdown()
+#    ftpdown()    """Call ftpdown func to download log file."""
     f = open(filename)
 
     for log in f:
@@ -117,12 +124,12 @@ def deallog():
         if rpe:
             for e in rpe:
                 ape = e.split('&')[0].split('pe=')[1].split('HTTP')[0]
-    #            trpe = re.compile(r'\d{1,4}[/.-]?\d{1,4}[/.-]?\d{1,4}.*').findall(ape)
-    #            if trpe:
-    #                for tpe in trpe:
-    #                   pe = "<br/>".join(tpe.split('<br/>')[1:])
-    #            else:
-    #                pe = ape
+#                trpe = re.compile(r'\d{1,4}[/.-]?\d{1,4}[/.-]?\d{1,4}.*').findall(ape)
+#                if trpe:
+#                    for tpe in trpe:
+#                       pe = "<br/>".join(tpe.split('<br/>')[1:])
+#                else:
+#                    pe = ape
                 pe = ape
         else:
             pe = None
@@ -218,7 +225,7 @@ def deallog():
         else:
             ua = None
 
-        #Insert into database. 
+        """Insert into database."""
         mysqlconn(dt, pe, dmod, dos, osv, cpu, ram, rom, jb, de, apn, av, mem, pv, ua)
 
 for f in os.popen("ls SmartMAD2_error_13*.log"):
