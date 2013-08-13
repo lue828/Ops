@@ -19,4 +19,9 @@ urlpatterns += patterns('contact.views',
     url(r'^contact/$', 'contact'),                    
 )
 
+urlpatterns += patterns('deallog.views',
+    url(r'^errlog/$', 'errlog'),
+    url(r'^smlog/$', 'smlogs'),
+)
+
 urlpatterns += staticfiles_urlpatterns()

@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'admin',
     'books',
+    'deallog',
 )
 
 # A sample logging configuration. The only tangible logging
