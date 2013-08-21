@@ -74,7 +74,9 @@ fi
 #Clone vm from template.
 virt-clone -o Optimad -n ${vm_name} -f /services/vms/${vm_name}.img
 
+#If config hava IPADDR,then replace
 #virt-edit -d ${vm_name} /etc/sysconfig/network-scripts/ifcfg-eth0 -e "s/IPADDR=.*/IPADDR=${vm_ip}/"
+
 #virt-edit -d test /etc/sysconfig/network-scripts/ifcfg-eth0 -e '$_="" if /^HWADDR.*/'
 #virt-edit -d ${vm_name} /etc/sysconfig/network-scripts/ifcfg-eth0 -e "s/ONBOOT=no/ONBOOT=yes/"
 #virt-edit -d ${vm_name} /etc/sysconfig/network-scripts/ifcfg-eth0 -e "s/BOOTPROTO=dhcp/BOOTPROTO=static/"
