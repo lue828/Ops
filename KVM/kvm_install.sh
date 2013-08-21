@@ -60,6 +60,11 @@ fi
 
 
 #Download vm template
+if [ ! -d /services/vms ]
+then
+    mkdir -p /services/vms
+fi
+
 if [ ! -f /services/vms/Optimad.img ]
 then
     wget http://puppet.madhouse.cn/Optimad.img.bz2 -O /services/vms/Optimad.img.bz2
