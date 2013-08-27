@@ -12,7 +12,7 @@ vm_ip=172.16.27.68
 #read -p "Enter a ip address:" ip
 
 #Set PS1
-echo "PS1='[\u@\[\033[1;34m\]\h\[\033[0m\]-\[\033[1;35m\]\t\[\033[0m\]\W]\$'" >> /etc/bashrc
+echo "PS1='[\u@\[\033[1;34m\]\h\[\033[0m\]-\[\033[1;35m\]\t\[\033[0m\]\W]#'" >> /etc/bashrc
 source /etc/bashrc
 
 if [ ${v} == vmx ]
