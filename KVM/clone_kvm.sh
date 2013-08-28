@@ -24,7 +24,7 @@ then
     bzip2 -d /services/vms/Optimad.img.bz2
 fi
 
-if [ ! -f /services/vms/Optimad.xml ]
+if [ ! -f /etc/libvirt/qemu/Optimad.xml ]
 then
     wget http://puppet.madhouse.cn/Optimad.xml -O /etc/libvirt/qemu/Optimad.xml
 fi
