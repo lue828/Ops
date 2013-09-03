@@ -49,6 +49,7 @@ iptables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 2
 
 
 # open ports
+iptables -A INPUT -p tcp -j LOG --log-prefix "IPTABLES TCP-IN: "
 iptables -A INPUT -i $IFACE -p tcp --dport 21 -j ACCEPT            #FTP
 iptables -A INPUT -i $IFACE -p tcp --dport 22 -j ACCEPT            #SSH
 iptables -A INPUT -i $IFACE -p tcp --dport 25 -j ACCEPT            #Mail
@@ -89,6 +90,7 @@ iptables -I INPUT -p tcp --dport 6346 -j DROP
 iptables -I INPUT -p tcp --dport 6667 -j DROP
 iptables -I INPUT -p tcp --dport 9393 -j DROP
 
+iptables -A FORWARD -p tcp -j LOG --log-prefix "IPTABLES FORWARD: "
 iptables -I FORWARD -p udp --dport 69 -j DROP
 iptables -I FORWARD -p tcp --dport 135 -j DROP
 iptables -I FORWARD -p udp --dport 135 -j DROP
@@ -127,3 +129,11 @@ iptables -A INPUT -p icmp -j DROP
 
 # drop ip
 #iptables -I INPUT -s 172.16.27.1 -j DROP
+
+
+#############¼ÇÂ¼ÈÕÖ¾#############
+#vim /etc/rsyslog.conf
+## Save Iptables log to iptables.log
+#kern.debug;kern.info                                    /var/log/iptables.log
+
+# service rsyslog restart
