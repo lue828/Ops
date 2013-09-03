@@ -38,6 +38,7 @@ iptables -t nat -P PREROUTING ACCEPT
 iptables -t nat -P POSTROUTING ACCEPT
 iptables -t nat -P OUTPUT ACCEPT
 
+iptables -A INPUT -i lo -j ACCEPT
 
 iptables -A INPUT -f -m limit --limit 100/sec --limit-burst 100 -j ACCEPT
 iptables -A INPUT -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 20/sec --limit-burst 200 -j ACCEPT
