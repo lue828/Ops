@@ -41,12 +41,17 @@ iptables -t nat -P OUTPUT ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
 iptables -A INPUT -f -m limit --limit 100/sec --limit-burst 100 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 20/sec --limit-burst 200 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m limit --limit 1/sec --limit-burst 1 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK RST -m limit --limit 1/sec --limit-burst 1 -j ACCEPT
 
-iptables -A INPUT -p icmp -m limit --limit 12/min --limit-burst 2 -j DROP
+iptables -A INPUT -p icmp -m limit --limit 1/sec --limit-burst 10 -j DROP
+
+iptables -A INPUT -i $IFACE -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i $IFACE -m state --state NEW,INVALID -j DROP
 
 iptables -A FORWARD -f -m limit --limit 100/sec --limit-burst 100 -j ACCEPT
-iptables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 20/sec --limit-burst 200 -j ACCEPT
+iptables -A FORWARD -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m limit --limit 1/sec --limit-burst 1 -j ACCEPT
+iptables -A FORWARD -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK RST -m limit --limit 1/sec --limit-burst 1 -j ACCEPT
 
 
 # open ports
@@ -120,9 +125,6 @@ iptables -I FORWARD -p tcp --dport 5900 -j DROP
 iptables -I FORWARD -p tcp --dport 6346 -j DROP
 iptables -I FORWARD -p tcp --dport 6667 -j DROP
 iptables -I FORWARD -p tcp --dport 9393 -j DROP
-
-iptables -A INPUT -i $IFACE -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i $IFACE -m state --state NEW,INVALID -j DROP
 
 
 # drop ping
