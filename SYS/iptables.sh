@@ -48,17 +48,15 @@ iptables -A FORWARD -f -m limit --limit 100/sec --limit-burst 100 -j ACCEPT
 iptables -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST,ACK SYN -m limit --limit 20/sec --limit-burst 200 -j ACCEPT
 
 
-
-
 # open ports
-iptables -A INPUT -i $IFACE -p tcp --dport 21 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 25 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 53 -j ACCEPT
-iptables -A INPUT -i $IFACE -p udp --dport 53 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 100 -j ACCEPT
-iptables -A INPUT -i $IFACE -p tcp --dport 113 -j ACCEPT
+iptables -A INPUT -i $IFACE -p tcp --dport 21 -j ACCEPT            #FTP
+iptables -A INPUT -i $IFACE -p tcp --dport 22 -j ACCEPT            #SSH
+iptables -A INPUT -i $IFACE -p tcp --dport 25 -j ACCEPT            #Mail
+iptables -A INPUT -i $IFACE -p tcp --dport 53 -j ACCEPT            #DNS TCP
+iptables -A INPUT -i $IFACE -p udp --dport 53 -j ACCEPT            #DNS UDP
+iptables -A INPUT -i $IFACE -p tcp --dport 80 -j ACCEPT            #Httpd
+iptables -A INPUT -i $IFACE -p tcp --dport 3306 -j ACCEPT          #MySQL
+iptables -A INPUT -i $IFACE -p tcp --dport 5672 -j ACCEPT          #Rabbitmq
 
 
 # close ports
@@ -127,4 +125,5 @@ iptables -A INPUT -i $IFACE -m state --state NEW,INVALID -j DROP
 # drop ping
 iptables -A INPUT -p icmp -j DROP
 
-iptables -I INPUT -s 222.182.40.241 -j DROP
+# drop ip
+#iptables -I INPUT -s 172.16.27.1 -j DROP
