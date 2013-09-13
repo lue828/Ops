@@ -34,7 +34,6 @@ virsh define /etc/libvirt/qemu/Optimad.xml
 
 #Clone vm from template.
 virt-clone -o Optimad -n ${vm_name} -f /services/vms/${vm_name}.img
-virsh define /etc/libvirt/qemu/${vm}.xml
 
 #Config ip address
 #1、删除 /etc/udev/rules.d/70-persistent-net.rules文件或清空里面的值。
@@ -47,6 +46,9 @@ virt-edit -d ${vm_name} /etc/sysconfig/network-scripts/ifcfg-eth0 -e "s/GATEWAY=
 
 #Config hostname.
 virt-edit -d ${vm_name} /etc/sysconfig/network -e "s/HOSTNAME=.*/HOSTNAME=${hostname}/"
+
+#Define vm.
+virsh define /etc/libvirt/qemu/${vm}.xml
 
 #Start vm.
 virsh start ${vm_name}
