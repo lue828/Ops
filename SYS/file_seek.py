@@ -10,24 +10,24 @@
 import sys
 import time
  
-files='/usr/local/log/sec.log'
- 
- 
-def get_file_end(files="/usr/local/log/sec.log"):
+files='/var/log/secure'
+
+def get_file_end(files="/var/log/secure"):
     f=file(files,'r')
     f.seek(0,2)
     file_size=f.tell()
     f.close()
     return file_size
- 
- 
+
+
 def get_content(files,file_size,last_file_size):
     f=file(files,'r')
     f.seek(last_file_size,0)
     lines=f.readlines()
     for line in lines:
-        if line.lower().startswith('critical'):
-            print "critical"
+#        if line.lower().startswith('Sep'):
+#            print line
+        print line,
     f.close()
  
  
