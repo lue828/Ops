@@ -36,7 +36,7 @@ last_file_size=file_size
 while True:
     file_size=get_file_end()
     if(file_size>last_file_size):
-        print "size is change"
+#        print "size is change"
         get_content(files,file_size,last_file_size)
     else:
         print "size is not change"
