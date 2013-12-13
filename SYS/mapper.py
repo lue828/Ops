@@ -5,9 +5,9 @@ import sys
 debug = True
 
 if debug:
-        lzo = 0
+    lzo = 0
 else:
-        lzo = 1
+    lzo = 1
 
 for line in sys.stdin:
     try:
